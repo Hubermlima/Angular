@@ -1,0 +1,37 @@
+<div
+  style="width: 100vw; height: 100vh; background: white; display: flex; flex-direction: row; justify-content: center; align-items: center">
+
+  <div class="container-fluid row justify-content-md-center">
+
+    <div class="col-md-4 shadow-lg p-3 mb-5 bg-white rounded">
+
+      <div class="card">
+        <div class="card-header text-center">Login</div>
+        <div class="card-body">
+          <form method="post" action="">
+ 
+            <div class="mb-2">
+              <label for="username">Username:</label>
+              <input type="text" #email="ngModel" [(ngModel)]="userSys.username" id="username" name="username" class="form-control" required>           
+              <div *ngIf="email.invalid" class="alert alert-danger">
+                  Login required
+              </div>
+            </div>
+
+            <div class="mb-2">
+            <label for="password">Password:</label>
+            <input type="password" #passwd="ngModel" [(ngModel)]="userSys.password" id="password" name="password" class="form-control" required>
+            <div *ngIf="passwd.invalid" class="alert alert-danger">
+              Password required
+            </div>
+          </div>
+          
+          <button type="button" [disabled]="email.invalid || passwd.invalid" name="commit" (click)="login()" value="Login" class="btn btn-primary">Login</button>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

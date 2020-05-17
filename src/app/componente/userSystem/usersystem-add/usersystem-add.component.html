@@ -1,0 +1,130 @@
+<div class="container-fluid" style="margin: auto; height: 100%; padding-top: 70px; padding-bottom: -5px;">
+
+    <form #formvalidate="ngForm">
+	<div class="card shadow p-3 mb-1 bg-white rounded">
+					
+        <div class="card">
+            <div class="card-header p-1">User register</div>
+            <div class="card-body">
+
+                <!-- Id -->
+                <div class="row">
+                    <div class="col">
+                        <label class="label" for="id">Id</label>
+                        <input class="form-control mb-2" type="text" id="id" name="id"
+                            readonly autocomplete="false"
+                            style="background-color: whitesmoke;" [(ngModel)]="userSystem.id" >
+                    </div>
+                </div>
+                <!-- Username -->
+                <div class="row">
+                    <div class="col">
+                        <label class="label" for="usernameUser">User name</label> 
+                        <span style="color: red; font-size: 23px;" *ngIf="usernamevalidate.invalid">*</span>
+                        
+                        <input #usernamevalidate="ngModel"
+                            class="form-control mb-2" type="text"
+                            id="usernameUser" name="usernameUser" required="true" [(ngModel)]="userSystem.username">
+                    </div>
+                </div>
+
+                <!-- Password -->
+                <div class="row">
+                    <div class="col">
+                        <label class="label" for="passwordUser">Password</label> 
+                        <span style="color: red; font-size: 23px;" *ngIf="passwordvalidate.invalid">*</span>
+                        <input #passwordvalidate="ngModel"
+                            class="form-control mb-2" type="text" autocomplete="false"
+                            id="passwordUser" name="passwordUser" required="true" [(ngModel)]="userSystem.password">
+                    </div>
+                </div>
+
+                <!-- Name user -->
+                <div class="row">
+                    <div class="col">
+                        <label class="label" for="nameUser">User name</label> 
+                        <span style="color: red; font-size: 23px;" *ngIf="namevalidate.invalid">*</span>
+                        <input #namevalidate="ngModel"
+                            class="form-control mb-2" type="text"
+                            id="nameUser" name="nameUser" autocomplete="false" required="true" [(ngModel)]="userSystem.nameUser">
+
+                    </div>
+                </div>
+          
+                <div class="card text-center">
+                            <div class="card-header">
+                                 Telefones de {{ userSystem.nameUser }}
+                            </div>
+                            <div class="card-body">
+                             
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Número</label>
+                                    <div class="col-sm-10">
+                                    <input type="text" class="form-control" [(ngModel)]="telephone.number" name="number" id="number">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Type</label>
+                                    <div class="col-sm-10">
+                                    <input type="text" class="form-control" [(ngModel)]="telephone.type" name="type" id="type">
+                                    </div>
+                                </div>
+
+                                <button (click)="addTelephoneUser()" class="btn btn-primary mb-3">Adicionar</button>
+
+                                <div id="tableTelefones">  
+                                    <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Number</th>
+                                            <th scope="col">Type</th>
+                                            <th scope="col">Action</th>
+                                        </tr> 
+                                    </thead>
+                                    <tbody>
+                                            <tr scope="row" *ngFor="let telephone of userSystem.telephones; let i = index">
+                                                <td>{{telephone.id}}</td>
+                                                <td>{{telephone.number}}</td> 
+                                                <td>{{telephone.type}}</td> 
+                                                <td><button (click)="removeSelectedTelephone(telephone.id, i)" class="btn btn-danger">Remove</button></td>
+                                            </tr>
+                                    </tbody>   
+                                    </table>
+
+                            </div>    
+                            </div>
+                            <div class="card-footer text-muted">
+                                Relação de telefones
+                            </div>
+                  </div>
+                
+                  
+
+
+
+
+
+
+                <!-- Button -->
+                <div class="row mt-2">
+                    <div class="col">
+                        <button class="btn btn-primary" [routerLink]="['/userList']" routerLinkActive="router-link-active">Back</button>    
+                
+                        <button class="btn btn-primary ml-1" (click)="newUser()" >New user</button>    
+               
+                        <button class="btn btn-primary ml-1" [disabled]="formvalidate.invalid" (click)="persistUserSystem()">Persist user</button>
+                    </div>
+
+                    
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</form>
+</div>    
+
